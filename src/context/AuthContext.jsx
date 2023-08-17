@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { createContext, useState, useContext } from "react";
 import { registerRequest, loginRequest, verifyRequest } from "../api/auth";
-import { registerJobRequest } from "../api/crud";
+import { registerJobRequest, getProfile } from "../api/crud";
 import { useToasts } from "react-toast-notifications";
+
 import Cookies from "js-cookie";
 
 const AuthContext = createContext();
@@ -19,6 +20,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setuser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [profilePublic, setProfilePublic] = useState(null);
 
   const singUp = async (values) => {
     try {
@@ -53,17 +56,19 @@ export const AuthProvider = ({ children }) => {
         setIsAuth(true);
         // La solicitud fue exitosa, muestra una notificación de éxito
         addToast("inicio de sesión exitoso", { appearance: "success" });
+        setLoading(false);
       } else {
-        // La solicitud falló, muestra una notificación de error8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+        // La solicitud falló, muestra una notificación de
+        setLoading(false);
         addToast("Error al iniciar sesión", { appearance: "error" });
       }
     } catch (error) {
-      console.log(error);
       console.error("Error al iniciar sesión:", error?.response?.data);
       // Muestra una notificación de error en caso de excepción
       addToast(error?.response?.data || error?.message, {
         appearance: "error",
       });
+      setLoading(false);
     }
   };
 
@@ -72,23 +77,28 @@ export const AuthProvider = ({ children }) => {
       const createJob = await registerJobRequest(values);
       if (createJob?.data?.success) {
         // La solicitud fue exitosa, muestra una notificación de éxito
-        addToast("Success", { appearance: "success" });
+        addToast("Éxito al crear el trabajo", { appearance: "success" });
       } else {
         // La solicitud falló, muestra una notificación de
-        addToast("Error", { appearance: "error" });
+        addToast("Ups! algo ha salido mal", { appearance: "error" });
       }
     } catch (error) {
-      console.log(error);
-      console.error("Error al iniciar sesión:", error?.response?.data);
+      console.error("Error al crear :", error);
       // Muestra una notificación de error en caso de excepción
-      addToast(error?.response?.data || error?.message, {
+      addToast(error?.response?.data?.message, {
         appearance: "error",
       });
     }
   };
+
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookies.get();
+      if (Object.keys(cookies).length === 0) {
+        setIsAuth(false);
+        setLoading(false);
+        return setuser(null);
+      }
       if (!cookies.token) {
         setIsAuth(false);
         return setuser(null);
@@ -100,7 +110,6 @@ export const AuthProvider = ({ children }) => {
           setLoading(false);
           return;
         }
-
         setIsAuth(true);
         setuser(res.data);
         setLoading(false);
@@ -113,9 +122,40 @@ export const AuthProvider = ({ children }) => {
     checkLogin();
   }, []);
 
+  async function getProfileFunction(nickname) {
+    try {
+      const res = await getProfile(nickname);
+      if (!res.data) {
+        addToast("Algo ha salido mal", { appearance: "error" });
+        setIsError(true);
+      } else {
+        addToast("Perfil encontrado", {
+          appearance: "success",
+        });
+        setProfilePublic(res.data);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      setIsError(true);
+      addToast(error.response.data, { appearance: "error" });
+      setLoading(false);
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ singUp, user, isAuth, singIn, loading, createJobs }}
+      value={{
+        singUp,
+        user,
+        isAuth,
+        singIn,
+        loading,
+        createJobs,
+        getProfileFunction,
+        isError,
+        profilePublic,
+      }}
     >
       {children}
     </AuthContext.Provider>

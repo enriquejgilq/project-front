@@ -10,7 +10,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { Autocomplete } from "@mui/material";
-
+import styles from "./styles.module.css";
 import { useAuth } from "../context/AuthContext";
 
 function Jobs() {
@@ -36,22 +36,29 @@ function Jobs() {
     "Redux",
     "Material-UI",
     "Yup",
+    "JavaScript",
+    "GraphQL",
+    "CSS",
   ];
   const handleSubmit = (values) => {
     createJobs(values);
-    console.log(values);
   };
   return (
-    <div className="max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Submit Project</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.formTitle}>Crear un nuevo trabajo</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({ values, errors, touched, setFieldValue }) => (
-          <Form>
-            <Grid container spacing={2}>
+          <Form className={styles.form}>
+            <Grid
+              container
+              spacing={2}
+              className="justify-center"
+              maxWidth="md"
+            >
               <Grid item xs={12}>
                 <Field
                   name="title"
@@ -120,8 +127,13 @@ function Jobs() {
                 />
               </Grid>
             </Grid>
-            <Button type="submit" variant="contained" color="primary">
-              Submit
+            <Button
+              className={styles.submitButton}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Guardar
             </Button>
           </Form>
         )}

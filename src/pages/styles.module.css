@@ -1,0 +1,30 @@
+/* styles.module.css */
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(209 213 219);
+
+    padding: 1rem;
+    height: 100vh; /* Make the container occupy the full viewport height */
+}
+
+.formTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.formField {
+    margin-bottom: 1rem;
+}
+
+.submitButton {
+    margin-top: 1rem;
+}

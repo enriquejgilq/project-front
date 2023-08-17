@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import { FaGithub } from "react-icons/fa";
@@ -45,6 +45,8 @@ import {
   imgwork38,
   quote,
 } from "../assets/images/imageImports";
+import { getPublicJobs } from "../api/crud";
+import { useToasts } from "react-toast-notifications";
 function SampleNextArrow(props) {
   const { onClick } = props;
   return (
@@ -69,7 +71,9 @@ function SamplePrevArrow(props) {
   );
 }
 
-const Projects = () => {
+const Projects = ({ id }) => {
+  const { addToast } = useToasts();
+  const [jobs, setjobs] = useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -155,19 +159,42 @@ const Projects = () => {
       link: "https://github.com/enriquejgilq/lqn-test",
     },
   ];
+  async function getJobs() {
+    try {
+      const res = await getPublicJobs(id);
+      if (!res.data) {
+        addToast("Algo ha salido mal", { appearance: "error" });
+        return;
+      }
+      setjobs(res.data);
+      addToast("Exito", {
+        appearance: "success",
+      });
+    } catch (error) {
+      addToast("Error", { appearance: "error" });
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      getJobs();
+    }
+  }, []);
+
+  console.log("jobs", jobs);
   return (
     <div
       id="projects"
       className="w-full py-20 border-b-[1px] border-b-black animate-fade-in"
     >
       <Slider {...settings}>
-        {data.map((item) => (
+        {jobs.map((item) => (
           <div className="w-full">
             <div className="w-full h-auto flex flex-col lg:flex-row justify-between">
               <div className="w-full lg:w-[35%] h-full bg-gradient-to-r from-[#1e2024] to-[#23272b] p-8 rounded-lg shadow-shadowOne flex flex-col md:flex-row lg:flex-col gap-8 justify-center md:justify-start lg:justify-center">
                 <img
                   className="h-72 md:h-32 lg:h-72 rounded-lg object-cover"
-                  src={item.images[0]}
+                  src={item?.images[0]}
                   alt="testimonialOne"
                 />
                 <div className="w-full flex flex-col justify-end">
@@ -181,7 +208,7 @@ const Projects = () => {
               </div>
               <div className="w-full lg:w-[60%] h-full flex flex-col justify-between">
                 <img
-                  className="w-20 lg:w-32 scale-x-[-1] scale-y-[-1]"
+                  className="w-20 lg:w-32 scale-x-[-1]  "
                   src={quote}
                   alt="quote"
                 />
