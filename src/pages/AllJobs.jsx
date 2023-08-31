@@ -13,11 +13,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getJobRequest, deleteJobRequest } from "../api/crud";
-import { useToasts } from "react-toast-notifications";
 
 const JobList = () => {
   const { isAuth } = useAuth();
-  const { addToast } = useToasts();
   const navigate = useNavigate();
   const [dataJobs, setdataJobs] = useState([]);
 
@@ -42,16 +40,10 @@ const JobList = () => {
     try {
       const res = await getJobRequest();
       if (!res.data) {
-        addToast("Algo ha salido mal", { appearance: "error" });
         return;
       }
       setdataJobs(res.data);
-      addToast("Exito al cargar todos trabajos", {
-        appearance: "success",
-      });
-    } catch (error) {
-      addToast(error.response.data.message, { appearance: "error" });
-    }
+    } catch (error) {}
   }
   if (dataJobs.length === 0) {
     return (

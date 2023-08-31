@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -15,6 +15,7 @@ import { useAuth } from "../context/AuthContext";
 
 function Jobs() {
   const { createJobs } = useAuth();
+  const [base64Image, setBase64Image] = useState("");
 
   const initialValues = {
     title: "",
@@ -40,104 +41,112 @@ function Jobs() {
     "GraphQL",
     "CSS",
   ];
-  const handleSubmit = (values) => {
-    createJobs(values);
+
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("description", values.description);
+    formData.append("technologies", values.technologies);
+    formData.append("link", values.link);
+    for (let i = 0; i < values.images.length; i++) {
+      formData.append(`images`, values.images[i]);
+    }
+    createJobs(formData);
   };
   return (
-    <div className={styles.formContainer}>
-      <h2 className={styles.formTitle}>Crear un nuevo trabajo</h2>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, touched, setFieldValue }) => (
-          <Form className={styles.form}>
-            <Grid
-              container
-              spacing={2}
-              className="justify-center"
-              maxWidth="md"
-            >
-              <Grid item xs={12}>
-                <Field
-                  name="title"
-                  as={TextField}
-                  label="Title"
-                  fullWidth
-                  helperText={touched.title && errors.title}
-                  error={touched.title && Boolean(errors.title)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Field
-                  name="description"
-                  as={TextField}
-                  label="Description"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  helperText={touched.description && errors.description}
-                  error={touched.description && Boolean(errors.description)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel>Images</InputLabel>
-                  <Input
-                    type="file"
-                    inputProps={{ multiple: true }}
-                    onChange={(event) => {
-                      setFieldValue("images", event.currentTarget.files);
-                    }}
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="text-center">
+        <h2 className={styles.formTitle}>Crear un nuevo trabajo</h2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, errors, touched, setFieldValue }) => (
+            <Form className="w-full p-3">
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Field
+                    name="title"
+                    as={TextField}
+                    label="Title"
+                    fullWidth
+                    helperText={touched.title && errors.title}
+                    error={touched.title && Boolean(errors.title)}
                   />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel>Technologies</InputLabel>
-                  <Autocomplete
-                    name="technologies"
-                    multiple
-                    options={technologiesOptions}
-                    value={values.technologies}
-                    onChange={(event, newValue) => {
-                      setFieldValue("technologies", newValue);
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        error={
-                          touched.technologies && Boolean(errors.technologies)
-                        }
-                        helperText={touched.technologies && errors.technologies}
-                      />
-                    )}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Field
+                    name="description"
+                    as={TextField}
+                    label="Description"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    helperText={touched.description && errors.description}
+                    error={touched.description && Boolean(errors.description)}
                   />
-                </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <Input
+                      type="file"
+                      inputProps={{ multiple: true }}
+                      onChange={(event) => {
+                        setFieldValue("images", event.currentTarget.files);
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <Autocomplete
+                      name="technologies"
+                      multiple
+                      options={technologiesOptions}
+                      value={values.technologies}
+                      onChange={(event, newValue) => {
+                        setFieldValue("technologies", newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          error={
+                            touched.technologies && Boolean(errors.technologies)
+                          }
+                          helperText={
+                            touched.technologies && errors.technologies
+                          }
+                        />
+                      )}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Field
+                    name="link"
+                    as={TextField}
+                    label="Link"
+                    fullWidth
+                    helperText={touched.link && errors.link}
+                    error={touched.link && Boolean(errors.link)}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Field
-                  name="link"
-                  as={TextField}
-                  label="Link"
-                  fullWidth
-                  helperText={touched.link && errors.link}
-                  error={touched.link && Boolean(errors.link)}
-                />
+              <Grid item xs={12} md={12}>
+                <Button
+                  className="m-2"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
+                  Guardar
+                </Button>
               </Grid>
-            </Grid>
-            <Button
-              className={styles.submitButton}
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
-              Guardar
-            </Button>
-          </Form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      </div>{" "}
     </div>
   );
 }

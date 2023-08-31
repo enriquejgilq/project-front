@@ -17,7 +17,6 @@ import * as Yup from "yup";
 import { useAuth } from "../context/AuthContext";
 import { getJobDetailsRequest, updateJobRequest } from "../api/crud";
 import { useParams } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
@@ -83,14 +82,7 @@ const JobDetails = ({
   );
 };
 
-const EditableJobDetails = ({
-  title,
-  description,
-  technologies,
-  link,
-  id,
-  addToast,
-}) => {
+const EditableJobDetails = ({ title, description, technologies, link, id }) => {
   const navigate = useNavigate();
   const initialValues = {
     title: title,
@@ -117,16 +109,11 @@ const EditableJobDetails = ({
     try {
       const res = await updateJobRequest(id, values);
       if (!res.data) {
-        addToast("Algo ha salido mal", { appearance: "error" });
         return;
       }
-      addToast("Exito al editar información", {
-        appearance: "success",
-      });
+
       setdata(res.data);
-    } catch (error) {
-      addToast(error.response.data.message, { appearance: "error" });
-    }
+    } catch (error) {}
   };
 
   return (
@@ -242,23 +229,17 @@ const JobDetailsPage = () => {
   const { isAuth } = useAuth();
   const { id } = useParams();
   const [data, setdata] = useState({});
-  const { addToast } = useToasts();
   const [isEditing, setIsEditing] = useState(false);
 
   async function getMyJobs() {
     try {
       const res = await getJobDetailsRequest(id);
       if (!res.data) {
-        addToast("Algo ha salido mal", { appearance: "error" });
         return;
       }
-      addToast("Exito al cargar información del trabajo", {
-        appearance: "success",
-      });
+
       setdata(res.data);
-    } catch (error) {
-      addToast(error.response.data.message, { appearance: "error" });
-    }
+    } catch (error) {}
   }
   useEffect(() => {
     if (isAuth) {
@@ -276,7 +257,7 @@ const JobDetailsPage = () => {
           link={data.link}
           createdAt={data.createdAt}
           id={id}
-          addToast={addToast}
+          // addToast={addToast}
         />
       ) : (
         <JobDetails

@@ -4,12 +4,8 @@ import { AuthProvider } from "./context/AuthContext";
 import { Navigate } from "react-router-dom";
 
 // Componentes generales
-import Navbar from "./components/Navbar";
-import Transition from "./components/Transition";
 
 // Páginas de autenticación
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -19,16 +15,15 @@ import AllJobs from "./pages/AllJobs";
 import JobDetails from "./pages/JobDetails";
 
 // Componentes del sitio
-import NewHome from "./components/NewHome";
-import Home from "./components/Home";
-import Projects from "./components/Projects";
-import AboutMe from "./components/AboutMe";
-import Contact from "./components/Contact";
+import NewHome from "./pages/NewHome";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import AboutMe from "./pages/Aboutme";
+import Contact from "./pages/Contact";
 
 // Rutas personalizadas
 import RouteWithUser from "./pages/RouteWithUser";
-
-import UserNotFoundScreen from "./pages/UserNotFound";
+import LoginAndregister from "./pages/loginAndregister";
 
 function App() {
   return (
@@ -38,8 +33,8 @@ function App() {
           <Route path="/" element={<Navigate to="newhome" />} />
           <Route path="/newhome" element={<NewHome />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<LoginAndregister />} />
+          <Route path="/register" element={<LoginAndregister />} />
 
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
