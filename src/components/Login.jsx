@@ -19,13 +19,16 @@ function Login() {
       .min(6, "La contraseña debe tener al menos 6 caracteres")
       .required("La contraseña es requerida"),
   });
+
   const initialValues = {
     email: "",
     password: "",
   };
+
   const onSubmit = async (values) => {
     singIn(values);
   };
+
   useEffect(() => {
     if (isAuth) {
       navigate("/jobs");
