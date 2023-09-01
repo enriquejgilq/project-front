@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=./",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -23,7 +23,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
-    "npm ": "^1.8.9",
+    "react-scroll": "^1.8.9",
     "react-slick": "^0.29.0",
     "react-type-animation": "^3.1.0",
     "slick-carousel": "^1.8.1",
