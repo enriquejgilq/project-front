@@ -34,10 +34,10 @@ const validationSchema = Yup.object().shape({
 const StepForm = ({ step, onSubmit, setFieldValue }) => {
   const [showPassword, setShowPassword] = useState(false);
   const initialValues = {
-    userName: "22asd",
-    email: "enriqueg@ccc.com",
-    password: "123123",
-    nickName: "123123123",
+    userName: "",
+    email: "",
+    password: "",
+    nickName: "",
     works: [],
   };
 
