@@ -23,7 +23,7 @@ import Contact from "./pages/Contact";
 
 // Rutas personalizadas
 import RouteWithUser from "./pages/RouteWithUser";
-import LoginAndregister from "./pages/loginAndregister";
+import LoginAndregister from "./pages/LoginAndregister";
 
 function App() {
   return (
