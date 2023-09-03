@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 import Loading from "../components/Loading";
 import PetitionNotFound from "../pages/PetitionNotFound";
 import GalleryModal from "../components/GalleryModal";
-
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 function SampleNextArrow(props) {
   const { onClick } = props;
   return (
@@ -90,11 +90,16 @@ const Projects = () => {
           <div className="w-full h-screen overflow-y-auto ">
             <div className="w-full h-auto flex flex-col lg:flex-row justify-between">
               <div className="w-full lg:w-[35%] h-full bg-gradient-to-r from-[#1e2024] to-[#23272b] p-8 rounded-lg shadow-shadowOne flex flex-col md:flex-row lg:flex-col gap-8 justify-center md:justify-start lg:justify-center">
-                <img
-                  className="h-72 md:h-32 lg:h-72 rounded-lg object-cover"
-                  src={item.images.length === 0 ? imgwork17 : imgwork17}
-                  alt="testimonialOne"
-                />
+                {item.images.length === 0 ? (
+                  <HomeRepairServiceIcon />
+                ) : (
+                  <img
+                    className="h-72 md:h-32 lg:h-72 rounded-lg object-cover"
+                    src={item.images[0].image}
+                    alt="testimonialOne"
+                  />
+                )}
+
                 <div className="w-full flex flex-col justify-end">
                   <h3 className="text-2xl font-bold">{item.title}</h3>
                   {item.technologies?.map((tech) => (

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "http://localhost:3002/api",
+    baseURL: "https://project-back-vqbb-dev.fl0.io/api",
     withCredentials: true
 })
 export default instance
