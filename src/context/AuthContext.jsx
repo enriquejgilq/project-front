@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   const [profilePublic, setProfilePublic] = useState(null);
   const [jobs, setjobs] = useState([]);
   const [aboutMe, setaboutMe] = useState({});
+  console.log(user);
   ///registro de usuario
   const singUp = async (values) => {
     try {
@@ -136,6 +137,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookies.get();
+
       if (Object.keys(cookies).length === 0) {
         setIsAuth(false);
         setLoading(false);
