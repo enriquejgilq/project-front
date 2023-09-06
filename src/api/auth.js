@@ -10,6 +10,8 @@ export const verifyRequest = (token) => {
 
     return axios.get("/verify", {
         headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
             token: `${token.token}`,
         },
     });
