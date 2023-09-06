@@ -137,35 +137,39 @@ export const AuthProvider = ({ children }) => {
 
   //check token
   useEffect(() => {
-    async function checkLogin() {
-      const cookies = Cookies.get();
+    setTimeout(() => {
+      setLoading(true);
+      async function checkLogin() {
+        const cookies = Cookies.get();
 
-      if (Object.keys(cookies).length === 0) {
-        setIsAuth(false);
-        setLoading(false);
-        return setuser(null);
-      }
-      if (!cookies.token) {
-        setIsAuth(false);
-        return setuser(null);
-      }
-      try {
-        const res = await verifyRequest(cookies.token);
-        if (!res.data) {
+        if (Object.keys(cookies).length === 0) {
           setIsAuth(false);
           setLoading(false);
-          return;
+          return setuser(null);
         }
-        setIsAuth(true);
-        setuser(res.data);
-        setLoading(false);
-      } catch (error) {
-        setIsAuth(false);
-        setuser(null);
-        setLoading(false);
+        if (!cookies.token) {
+          setIsAuth(false);
+          return setuser(null);
+        }
+        try {
+          const res = await verifyRequest(cookies.token);
+          if (!res.data) {
+            setIsAuth(false);
+            setLoading(false);
+            return;
+          }
+          setIsAuth(true);
+          setuser(res.data);
+          setLoading(false);
+        } catch (error) {
+          setIsAuth(false);
+          setuser(null);
+          setLoading(false);
+        }
       }
-    }
-    checkLogin();
+      checkLogin();
+      setLoading(false);
+    }, 3000);
   }, []);
 
   return (
