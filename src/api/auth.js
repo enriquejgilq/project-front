@@ -8,9 +8,8 @@ export const loginRequest = user => axios.post(`/login`, user)
 //export const verifyToken = token => axios.get(`/verifyToken`, { token: token })
 export const verifyRequest = (token) => {
 
-    return axios.get("/verifyToken", {
+    return axios.get("/verify", {
         headers: {
-            "Content-Type": "application/json",
             token: `${token.token}`,
         },
     });
