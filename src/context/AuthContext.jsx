@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       const loginResponse = await loginRequest(values);
       if (loginResponse?.data?.success) {
         setuser(loginResponse?.data);
-        // document.cookie = "token" + "=" + loginResponse?.data?.token;
+        document.cookie = "token" + "=" + loginResponse?.data?.token;
         setIsAuth(true);
         // La solicitud fue exitosa, muestra una notificación de éxito
         setLoading(false);
