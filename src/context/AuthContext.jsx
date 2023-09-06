@@ -139,6 +139,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookies.get();
+      const token = `token=${cookies}`;
       if (Object.keys(cookies).length === 0) {
         setIsAuth(false);
         setLoading(false);
@@ -149,7 +150,7 @@ export const AuthProvider = ({ children }) => {
         return setuser(null);
       }
       try {
-        const res = await verifyRequest(cookies.token);
+        const res = await verifyRequest(token);
         if (!res.data) {
           setIsAuth(false);
           setLoading(false);
