@@ -6,6 +6,7 @@ import {
   getProfile,
   getPublicJobs,
   getPublicAboutme,
+  registerAboutMe,
 } from "../api/crud";
 import Cookies from "js-cookie";
 import CustomModal from "../components/CustomModal";
@@ -27,7 +28,6 @@ export const AuthProvider = ({ children }) => {
   const [profilePublic, setProfilePublic] = useState(null);
   const [jobs, setjobs] = useState([]);
   const [aboutMe, setaboutMe] = useState({});
-  console.log(user);
   ///registro de usuario
   const singUp = async (values) => {
     try {
@@ -135,11 +135,23 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const createAboutme = async (values) => {
+    try {
+      const createAboutme = await registerAboutMe(values);
+      if (createAboutme?.data?.success) {
+        // La solicitud fue exitosa, muestra una notificación de éxito
+      } else {
+        // La solicitud falló, muestra una notificación de
+      }
+    } catch (error) {
+      console.error("Error al crear :", error);
+      // Muestra una notificación de error en caso de excepción
+    }
+  };
   //check token
   useEffect(() => {
     const cookies = Cookies.get();
-    const { token } = cookies;
-    async function checkLogin(token) {
+    async function checkLogin() {
       if (Object.keys(cookies).length === 0) {
         setIsAuth(false);
         setLoading(false);
@@ -150,7 +162,7 @@ export const AuthProvider = ({ children }) => {
         return setuser(null);
       }
       try {
-        const res = await verifyRequest(token);
+        const res = await verifyRequest();
         if (!res.data) {
           setIsAuth(false);
           setLoading(false);
@@ -165,7 +177,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     }
-    checkLogin({ token: token });
+    checkLogin();
   }, []);
 
   return (
@@ -184,6 +196,7 @@ export const AuthProvider = ({ children }) => {
         jobs,
         getAboutMePublic,
         aboutMe,
+        createAboutme,
       }}
     >
       {children}

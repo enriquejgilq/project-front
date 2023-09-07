@@ -20,6 +20,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import AboutMe from "./pages/Aboutme";
 import Contact from "./pages/Contact";
+import AboutMeRegister from "./pages/AboutMeRegister";
 
 // Rutas personalizadas
 import RouteWithUser from "./pages/RouteWithUser";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/all-jobs" element={<AllJobs />} />
             <Route path="/detail-jobs/:id" element={<JobDetails />} />
+            <Route path="/about-me" element={<AboutMeRegister />} />
           </Route>
 
           {/* RouteWithUser */}

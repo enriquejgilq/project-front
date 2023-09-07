@@ -15,7 +15,6 @@ import { useAuth } from "../context/AuthContext";
 
 function Jobs() {
   const { createJobs } = useAuth();
-  const [base64Image, setBase64Image] = useState("");
 
   const initialValues = {
     title: "",
@@ -27,7 +26,7 @@ function Jobs() {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
-    link: Yup.string().url("Invalid URL").required("Required"),
+    // link: Yup.string().url("Invalid URL").required("Required"),
   });
   const technologiesOptions = [
     "React",
@@ -47,6 +46,7 @@ function Jobs() {
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("technologies", values.technologies);
+
     formData.append("link", values.link);
     for (let i = 0; i < values.images.length; i++) {
       formData.append(`images`, values.images[i]);
