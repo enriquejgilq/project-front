@@ -87,11 +87,11 @@ export const AuthProvider = ({ children }) => {
       const res = await getProfile(nickname);
       if (!res.data) {
         setIsError(true);
+        setLoading(false);
       } else {
         setProfilePublic(res.data);
+        setLoading(false);
       }
-
-      setLoading(false);
     } catch (error) {
       setIsError(true);
       setLoading(false);
@@ -104,12 +104,12 @@ export const AuthProvider = ({ children }) => {
       const res = await getPublicJobs(nickname);
       if (!res.data) {
         setIsError(true);
+        setLoading(false);
         setjobs([]);
       } else {
         setjobs(res.data);
+        setLoading(false);
       }
-
-      setLoading(false);
     } catch (error) {
       setIsError(true);
       setLoading(false);
@@ -123,11 +123,11 @@ export const AuthProvider = ({ children }) => {
       if (!res.data) {
         setIsError(true);
         setaboutMe({});
+        setLoading(false);
       } else {
         setaboutMe(res.data);
+        setLoading(false);
       }
-
-      setLoading(false);
     } catch (error) {
       setIsError(true);
       setLoading(false);

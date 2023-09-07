@@ -87,16 +87,16 @@ const Home = () => {
       <div className="w-full h-screen bg-gradient-to-bl from-green-900 via-gren-800 to-black   " />
       <div className="w-full h-screen absolute top-0 left-0 ">
         <div className="max-w-[700px] m-auto h-full w-full flex flex-col !justify-center lg:items-start lg:justify-start !items-center">
-          <h1 className="sm:text-5xl text-4xl font-bold text-black-800 text-center sm:text-center md:w-[300px] md:text-3xl">
+          <h1 className="sm:text-5xl text-4xl font-bold text-black-800 text-center sm:text-center md:w-[300px] md:text-3xl text-white ">
             Hola, soy {userName}
           </h1>
-          <h2 className="flex sm:text-3xl text-2xl pt-4 text-black-800">
+          <h2 className="flex sm:text-3xl text-2xl pt-4 text-black-800 text-white">
             Yo soy
             <TypeAnimation
               sequence={sequence}
               wrapper="span"
               speed={50}
-              style={{ fontSize: "1em", paddingLeft: "5px" }}
+              style={{ fontSize: "1em", paddingLeft: "5px", color: "white" }}
               repeat={Infinity}
             />
           </h2>
@@ -106,7 +106,7 @@ const Home = () => {
                 <social.icon
                   onClick={() => handleTo(social.link)}
                   size={20}
-                  className="cursor-pointer"
+                  className="cursor-pointer fill-white"
                 />
               </div>
             ))}

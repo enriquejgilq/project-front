@@ -31,7 +31,7 @@ const Aboutme = () => {
       <div className="w-full h-screen bg-gradient-to-bl from-green-900 via-gren-800 to-black  " />
       <div className="w-full h-screen absolute top-0 left-0  ">
         <div className="max-w-[700px] m-auto h-full w-full flex flex-col !justify-center lg:items-start lg:justify-start !items-center">
-          <h1 className="sm:text-5xl text-4xl font-bold text-black-800 text-center sm:text-center md:w-[300px] md:text-3xl">
+          <h1 className="sm:text-5xl text-4xl font-bold text-black-800 text-center sm:text-center md:w-[300px] md:text-3xl text-white">
             Sobre mí
           </h1>
 

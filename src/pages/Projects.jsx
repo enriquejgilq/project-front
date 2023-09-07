@@ -101,7 +101,9 @@ const Projects = () => {
                 )}
 
                 <div className="w-full flex flex-col justify-end">
-                  <h3 className="text-2xl font-bold">{item.title}</h3>
+                  <h3 className="text-2xl font-bold text-white">
+                    {item.title}
+                  </h3>
                   {item.technologies?.map((tech) => (
                     <p className="text-base tracking-wide text-gray-500">
                       {tech}
