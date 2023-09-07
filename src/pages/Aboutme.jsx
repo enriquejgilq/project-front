@@ -39,18 +39,18 @@ const Aboutme = () => {
             <img
               src={aboutMe?.images[0].image}
               alt="aboutMe"
-              style={{ width: "250px", height: "250px" }}
+              style={{ width: "150px", height: "150px", borderRadius: "50%" }}
             />
           ) : (
             <AccountCircleIcon />
           )}
 
-          <h2 className="flex sm:text-3xl text-2xl pt-4 text-black-800">
+          <h2 className="flex sm:text-3xl text-2xl pt-4 text-black-800 text-justify  text-white">
             {aboutMe.description}
           </h2>
           <div className="flex justify-center space-x-5 pt-6 max-w-[200px] w-full">
-            {" "}
-            <p>{aboutMe?.other} </p>
+            {aboutMe?.other !== null ||
+              (aboutMe?.other !== undefined && <p>{aboutMe?.other} </p>)}
           </div>
         </div>
       </div>
