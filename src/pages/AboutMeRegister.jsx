@@ -28,7 +28,7 @@ function AboutMeRegister() {
   const handleSubmit = async (values) => {
     const formData = new FormData();
     formData.append("description", values.description);
-    formData.append("other", values.technologies);
+    formData.append("other", values.other);
     for (let i = 0; i < values.images.length; i++) {
       formData.append(`images`, values.images[i]);
     }
