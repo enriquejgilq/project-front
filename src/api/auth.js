@@ -7,11 +7,10 @@ export const loginRequest = user => axios.post(`/login`, user)
 
 //export const verifyToken = token => axios.get(`/verifyToken`, { token: token })
 export const verifyRequest = (token) => {
-
-    return axios.get("/verify", {
+    return axios.get('/verify', {
         headers: {
-            "Content-Type": "application/json",
-            token: `${token.token}`,
+            'Authorization': `Bearer ${token.token}`,
+            'Content-Type': 'application/json',
         },
     });
 };
