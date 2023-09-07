@@ -45,7 +45,7 @@ const Aboutme = () => {
             <AccountCircleIcon />
           )}
 
-          <h2 className="flex sm:text-3xl text-2xl pt-4 text-black-800 text-justify  text-white">
+          <h2 className="flex sm:text-3xl text-2xs   text-black-800 text-center text-white p-7">
             {aboutMe.description}
           </h2>
           <div className="flex justify-center space-x-5 pt-6 max-w-[200px] w-full">
