@@ -111,29 +111,32 @@ const Projects = () => {
               </div>
               <div className="w-full lg:w-[60%] h-full flex flex-col justify-between">
                 <img
-                  className="w-20 lg:w-32 scale-x-[-1]  "
+                  className="w-20 lg:w-32 scale-x-[-1]"
                   src={quote}
                   alt="quote"
                 />
                 <div className="w-full h-[70%] py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] rounded-lg shadow-shadowOne p-4 lg:p-8 flex flex-col justify-center gap-4 lg:gap-8">
-                  <div className="flex flex-col justify-between lg:items-center py-6 border-b-2 border-b-gray-900">
-                    <div className=" flex gap-1">
+                  <div className="flex flex-col justify-between lg:items-center py-6 border-b-2 border-b-gray-900 ">
+                    <div className="flex gap-1 rounded-xl">
                       {item.images.map((item) => (
                         <img
+                          style={{ borderRadius: "10px" }}
                           onClick={() => viewImg(item.image)}
-                          className=" rounded-lg object-scale-down h-28 w-96 cursor-pointer "
+                          className=" object-scale-down h-28 w-96 cursor-pointer"
                           src={item.image}
                           alt={item.image}
                         />
                       ))}
                     </div>
-                    <div className="flex flex-col lg:flex-row justify-center items-center p-3">
-                      <FaGithub
-                        onClick={() => handleTo(item.link)}
-                        size={20}
-                        className="cursor-pointer"
-                      />
-                    </div>
+                    {item.link !== "" && (
+                      <div className="flex flex-col lg:flex-row justify-center items-center p-3">
+                        <FaGithub
+                          onClick={() => handleTo(item.link)}
+                          size={20}
+                          className="cursor-pointer"
+                        />
+                      </div>
+                    )}
                   </div>
                   <p className="text-base font-titleFont text-gray-400 font-medium tracking-wide leading-6">
                     {item.description} "
