@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 import PetitionNotFound from "../pages/PetitionNotFound";
 import GalleryModal from "../components/GalleryModal";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
+import styles from "./styles.module.css";
 function SampleNextArrow(props) {
   const { onClick } = props;
   return (
@@ -119,7 +120,10 @@ const Projects = () => {
                 />
                 <div className="w-full h-[70%] py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] rounded-lg shadow-shadowOne p-4 lg:p-8 flex flex-col justify-center gap-4 lg:gap-8">
                   <div className="flex flex-col justify-between lg:items-center py-6 border-b-2 border-b-gray-900 ">
-                    <div className="flex gap-1 rounded-xl">
+                    <div
+                      className={styles.imgcarousel}
+                      //className="flex gap-1 rounded-xl"
+                    >
                       {item.images.map((item) => (
                         <img
                           style={{ borderRadius: "10px" }}

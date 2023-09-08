@@ -28,3 +28,14 @@
 .submitButton {
     margin-top: 1rem;
 }
+.imgcarousel {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border-radius: 20px;
+}
+@media (max-width: 480px) {
+    .imgcarousel {
+        flex-direction: column;
+    }
+}
