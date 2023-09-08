@@ -95,13 +95,12 @@ const Home = () => {
             activeOffset={40}
             shadowScale={1.05}
             shadow={true}
-            onEnter={() => console.log("Enter")}
-            onLeave={() => console.log("Leave")}
-            onRotate={(x, y) => console.log("Rotate", x, y)}
           >
             <div className={styles.card}>
               <div>
-                <h1 className={styles.textprincipal}>Hola, soy {userName}</h1>
+                <h1 data-atropos-offset="-5" className={styles.textprincipal}>
+                  Hola, soy {userName}
+                </h1>
                 <div className={styles.textmachine}>
                   <h2>
                     <TypeAnimation
@@ -118,7 +117,7 @@ const Home = () => {
                   </h2>
                 </div>
 
-                <div className={styles.link}>
+                <div data-atropos-offset="5" className={styles.link}>
                   {mergedLinks.map((social, index) => (
                     <div key={index}>
                       <social.icon
