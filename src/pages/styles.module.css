@@ -39,3 +39,59 @@
         flex-direction: column;
     }
 }
+
+.styleAtropos {
+    width: 600px;
+    height: 400px;
+}
+
+.card {
+    height: 100%;
+    border-radius: 10px;
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+.textmachine {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.link {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+    gap: 5px;
+}
+
+.textprincipal {
+    font-size: 2.25rem; /* Tamaño de fuente para la clase "text-4xl" */
+    text-align: center; /* Alineación de texto para "text-center" */
+    font-weight: bold; /* Peso de fuente para "font-bold" */
+    color: #e2dfdf; /* Color de texto para "text-black-800" */
+    /* Otros estilos según tus preferencias */
+}
+
+@media (max-width: 480px) {
+    .styleAtropos {
+        width: 300px;
+        height: 300px; /* Puedes ajustar la altura según tus necesidades */
+    }
+    .textprincipal {
+        font-size: 24px; /* Tamaño de fuente para "md:text-3xl" en dispositivos medianos (ajusta según tus necesidades) */
+        max-width: 300px; /* Ancho máximo para "md:w-[300px]" en dispositivos medianos (ajusta según tus necesidades) */
+        color: #fff; /* Color de texto para "text-white" en dispositivos medianos (ajusta según tus necesidades) */
+    }
+}
