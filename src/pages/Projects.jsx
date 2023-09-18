@@ -40,7 +40,7 @@ const Projects = () => {
   const { nickname } = useParams();
   const [openImg, setopenImg] = useState(false);
   const [img, setImg] = useState(null);
-  const { getJobsFunction, loading, jobs } = useAuth();
+  const { getJobsFunction, loading, jobs, isError } = useAuth();
   useEffect(() => {
     if (nickname === undefined || nickname === null) return;
     if (nickname) {
@@ -51,7 +51,7 @@ const Projects = () => {
     return <Loading />;
   }
 
-  if (jobs.length === 0) {
+  if (jobs.length === 0 && loading === false) {
     return (
       <PetitionNotFound
         title="Sin trabajos cargados."

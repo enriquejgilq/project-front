@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }) => {
       if (!res.data) {
         setIsError(true);
         setLoading(false);
+        setProfilePublic(false);
       } else {
         setProfilePublic(res.data);
         setLoading(false);
@@ -95,6 +96,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       setIsError(true);
       setLoading(false);
+      setProfilePublic(false);
     }
   }
 
@@ -105,7 +107,7 @@ export const AuthProvider = ({ children }) => {
       if (!res.data) {
         setIsError(true);
         setLoading(false);
-        setjobs([]);
+        setjobs(false);
       } else {
         setjobs(res.data);
         setLoading(false);
@@ -113,7 +115,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       setIsError(true);
       setLoading(false);
-      setjobs([]);
+      setjobs(false);
     }
   }
 
@@ -122,7 +124,7 @@ export const AuthProvider = ({ children }) => {
       const res = await getPublicAboutme(nickname);
       if (!res.data) {
         setIsError(true);
-        setaboutMe({});
+        setaboutMe(false);
         setLoading(false);
       } else {
         setaboutMe(res.data);
@@ -131,7 +133,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       setIsError(true);
       setLoading(false);
-      setaboutMe({});
+      setaboutMe(false);
     }
   }
 
