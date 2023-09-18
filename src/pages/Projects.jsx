@@ -47,6 +47,7 @@ const Projects = () => {
       getJobsFunction(nickname);
     }
   }, []);
+
   if (loading) {
     return <Loading />;
   }

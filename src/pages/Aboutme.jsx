@@ -21,7 +21,7 @@ const Aboutme = () => {
   if (loading) {
     return <Loading />;
   }
-  if (isError && !aboutMe) {
+  if (isError && aboutMe === false) {
     return (
       <PetitionNotFound
         title="Información no encontrada."
@@ -41,10 +41,7 @@ const Aboutme = () => {
           shadow={true}
         >
           <div className="max-w-[700px] m-auto h-full w-full flex flex-col !justify-center lg:items-start lg:justify-start !items-center">
-            <h1 className="sm:text-5xl text-4xl font-bold text-black-800 text-center sm:text-center md:w-[300px] md:text-3xl text-white">
-              Sobre mí
-            </h1>
-
+            <h1 className=" text-white">Sobre mí</h1>
             {aboutMe?.images?.length > 0 ? (
               <img
                 src={aboutMe?.images[0].image}

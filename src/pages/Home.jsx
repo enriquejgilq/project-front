@@ -33,7 +33,7 @@ const Home = () => {
   if (loading) {
     return <Loading />;
   }
-  if (profilePublic === null && loading === false) {
+  if (profilePublic === null && loading == false) {
     return (
       <PetitionNotFound
         title="Usuario no encontrado"

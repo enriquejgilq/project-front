@@ -87,10 +87,10 @@
 @media (max-width: 480px) {
     .styleAtropos {
         width: 300px;
-        height: 300px; /* Puedes ajustar la altura según tus necesidades */
+        height: 400px; /* Puedes ajustar la altura según tus necesidades */
     }
     .textprincipal {
-        font-size: 24px; /* Tamaño de fuente para "md:text-3xl" en dispositivos medianos (ajusta según tus necesidades) */
+        font-size: 22px; /* Tamaño de fuente para "md:text-3xl" en dispositivos medianos (ajusta según tus necesidades) */
         max-width: 300px; /* Ancho máximo para "md:w-[300px]" en dispositivos medianos (ajusta según tus necesidades) */
         color: #fff; /* Color de texto para "text-white" en dispositivos medianos (ajusta según tus necesidades) */
     }
